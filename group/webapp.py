@@ -1,12 +1,9 @@
 import streamlit as st
 import pickle
-import pandas_profiling
-from streamlit_pandas_profiling import st_profile_report
 import pandas as pd
 import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
-from ydata_profiling import ProfileReport
 import matplotlib.pyplot as plt
 import numpy as np
 import plotly.subplots as sp
@@ -87,12 +84,6 @@ if st.sidebar.checkbox('Summary Statistics'):
     st.subheader('Summary Statistics')
     st.write(data.describe())
     st.write("In addition, the data has 0 null values")
-
-if st.sidebar.checkbox('Profile report'):
-    st.subheader('Data Profiling Report')
-    st.write('Use this interactive report to explore the variables if necessary.')
-    profile = pandas_profiling.ProfileReport(data)
-    st_profile_report(profile)
 
 if st.sidebar.checkbox('Outlier analysis'):
     st.subheader('Outlier analysis')
