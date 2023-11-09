@@ -4,7 +4,7 @@ numpy
 datetime
 matplotlib
 plotly
-sklearn 
+scikit-learn
 xgboost 
 numpy 
 pickle
