@@ -137,44 +137,6 @@ if st.sidebar.checkbox('Outlier analysis'):
 
     st.plotly_chart(fig2)
 
-if st.sidebar.checkbox('Feature engineering'):
-    st.subheader('Feature Engineering')
-    st.write("We created 3 new variables from the data: daylight_hours, lag_1 and lag_24.")
-    st.write("- daylight_hours': If the hours are between 8 and 17, then it returns 1 for day. Otherwise it returns the value 0 (for night)")
-    st.write("- lag_1': The number of bikes rented for the previous hour")
-    st.write("- lag_24': The number of bikes rented 24 hours earlier")
-
-    # Create a histogram
-    fig = px.histogram(filtered_data, x='daylight_hours', nbins=2, category_orders={'x': ['0', '1']})
-    fig.update_xaxes(tickvals=[0, 1], ticktext=['Night', 'Day'])
-    fig.update_xaxes(title='Daylight Hours')
-    fig.update_yaxes(title='Frequency')
-    fig.update_layout(title='Distribution of Daylight Hours')
-    st.plotly_chart(fig)
-
-    st.write("As we can see the counts are rather evenly distributed")
-
-    from statsmodels.graphics.tsaplots import plot_pacf, plot_acf
-    fig, ax = plt.subplots(figsize=(10, 5))
-    plot_pacf(data['total_count'], lags=30, ax=ax)
-    plt.title('Partial Autocorrelation Function (PACF) of Bike Usage')
-    plt.xlabel('Lag')
-    plt.ylabel('PACF')
-    plt.grid(True)
-    plt.show()
-    st.pyplot(fig)
-
-    fig, ax = plt.subplots(figsize=(10, 5))
-    plot_acf(data['total_count'], lags=30, ax=ax)
-    plt.title('Autocorrelation Function (ACF) of Bike Usage')
-    plt.xlabel('Lag')
-    plt.ylabel('PACF')
-    plt.grid(True)
-    plt.show()
-    st.pyplot(fig)
-
-    st.write("As we can see the 2 lags we selected show significant autocorrelation for both the ACF and PACF")
-
 if st.sidebar.checkbox('Graphical analysis'):
     st.subheader('Graphical analysis')
     import plotly.graph_objects as go
@@ -234,8 +196,6 @@ if st.sidebar.checkbox('Graphical analysis'):
     pivot_total = data.pivot_table(values='total_count', index='weekday', columns='hr', aggfunc='sum')
     pivot_registered = data.pivot_table(values='registered', index='weekday', columns='hr', aggfunc='sum')
     pivot_casual = data.pivot_table(values='casual', index='weekday', columns='hr', aggfunc='sum')
-
-    import plotly.graph_objects as go
 
     # Create a heatmap for Hourly Total Users by Day of the Week
     fig_total = go.Figure(data=go.Heatmap(
@@ -417,6 +377,43 @@ if st.sidebar.checkbox('Graphical analysis'):
     
     st.plotly_chart(fig_windspeed)
     st.write("Windspeed seems to have a slightly positive relationship with total count.")
+if st.sidebar.checkbox('Feature engineering'):
+    st.subheader('Feature Engineering')
+    st.write("We created 3 new variables from the data: daylight_hours, lag_1 and lag_24.")
+    st.write("- daylight_hours': If the hours are between 8 and 17, then it returns 1 for day. Otherwise it returns the value 0 (for night)")
+    st.write("- lag_1': The number of bikes rented for the previous hour")
+    st.write("- lag_24': The number of bikes rented 24 hours earlier")
+
+    # Create a histogram
+    fig = px.histogram(filtered_data, x='daylight_hours', nbins=2, category_orders={'x': ['0', '1']})
+    fig.update_xaxes(tickvals=[0, 1], ticktext=['Night', 'Day'])
+    fig.update_xaxes(title='Daylight Hours')
+    fig.update_yaxes(title='Frequency')
+    fig.update_layout(title='Distribution of Daylight Hours')
+    st.plotly_chart(fig)
+
+    st.write("As we can see the counts are rather evenly distributed")
+
+    from statsmodels.graphics.tsaplots import plot_pacf, plot_acf
+    fig, ax = plt.subplots(figsize=(10, 5))
+    plot_pacf(data['total_count'], lags=30, ax=ax)
+    plt.title('Partial Autocorrelation Function (PACF) of Bike Usage')
+    plt.xlabel('Lag')
+    plt.ylabel('PACF')
+    plt.grid(True)
+    plt.show()
+    st.pyplot(fig)
+
+    fig, ax = plt.subplots(figsize=(10, 5))
+    plot_acf(data['total_count'], lags=30, ax=ax)
+    plt.title('Autocorrelation Function (ACF) of Bike Usage')
+    plt.xlabel('Lag')
+    plt.ylabel('PACF')
+    plt.grid(True)
+    plt.show()
+    st.pyplot(fig)
+
+    st.write("As we can see the 2 lags we selected show significant autocorrelation for both the ACF and PACF")
     
 if st.sidebar.checkbox('Variable selection'):
     st.subheader('Variable selection')
