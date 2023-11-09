@@ -13,6 +13,7 @@ In this assignment, we accomplished the following key tasks:
    - Identified usage patterns, trends, and correlations in the data.
 
 2. **Predictive Modeling**:
+   - Tested different models to determine the best fit.
    - Developed an XGBoost Regressor model for forecasting the total number of bicycle users hourly.
    - Assessed the model's performance and accuracy.
 
