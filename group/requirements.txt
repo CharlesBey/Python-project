@@ -1,5 +1,4 @@
 tabulate
-pandas
 numpy
 datetime
 matplotlib
@@ -7,5 +6,9 @@ plotly
 scikit-learn
 xgboost 
 numpy 
+pandas
 pandas-profiling
+streamlit
+streamlit-pandas-profiling
+
 
