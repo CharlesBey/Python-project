@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-import matplotlib.pyplot as plt
 import numpy as np
 import plotly.subplots as sp
 from sklearn.model_selection import train_test_split
