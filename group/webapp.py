@@ -12,7 +12,8 @@ from sklearn.preprocessing import StandardScaler
 import plotly.offline as pyo
 
 # Load your dataset
-data = pd.read_csv('./bike-sharing_hourly.csv')
+uploaded_file = st.file_uploader("bike-sharing_hourly", type=["csv"])
+data = pd.read_csv(uploaded_file)
 
 # Data Preprocessing
 data.rename(columns={'instant':'rec_id','dteday':'datetime','yr':'year','mnth':'month','weathersit':'weather_condition',
