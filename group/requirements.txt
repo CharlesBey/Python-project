@@ -7,4 +7,4 @@ plotly
 scikit-learn
 xgboost 
 numpy 
-ydata_profiling
+ydata
