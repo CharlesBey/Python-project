@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 import pickle
 import pandas as pd
 import seaborn as sns
@@ -11,7 +12,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 import plotly.offline as pyo
 
-csv_file_path = "bike-sharing_hourly.csv"
+current_dir = os.getcwd()
+csv_file_path = os.path.join(current_dir, "bike-sharing_hourly.csv")
 # Load your dataset
 data = pd.read_csv(csv_file_path)
 
