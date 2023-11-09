@@ -50,7 +50,6 @@ filtered_data=filtered_data.iloc[24:]
 model_data = filtered_data.drop(['rec_id', 'datetime', 'season', 'atemp', 'registered', 'casual'], axis=1)
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
-profile = ProfileReport(data)
 
 # Title and description
 st.title('Predicting total number of bikes')
