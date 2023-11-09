@@ -12,10 +12,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 import plotly.offline as pyo
 
-current_dir = os.getcwd()
-csv_file_path = os.path.join(current_dir, "bike-sharing_hourly.csv")
 # Load your dataset
-data = pd.read_csv(csv_file_path)
+data = pd.read_csv("bike-sharing_hourly.csv")
 
 # Data Preprocessing
 data.rename(columns={'instant':'rec_id','dteday':'datetime','yr':'year','mnth':'month','weathersit':'weather_condition',
