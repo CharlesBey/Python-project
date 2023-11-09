@@ -654,8 +654,9 @@ def preprocess_inputs(year, month, hr, holiday, weekday, workingday, weather_con
     })
 
     # Feature scaling (only for numerical features)
-    scaler = StandardScaler()
-    user_inputs[['temp', 'humidity', 'windspeed', 'lag_1', 'lag_24', 'daylight_hours']] = scaler.fit_transform(user_inputs[['temp', 'humidity', 'windspeed', 'lag_1', 'lag_24', 'daylight_hours']])
+    with open('scaler.pkl', 'rb') as model_file:
+        scaler_loaded = pickle.load(model_file)
+    user_inputs[['temp', 'humidity', 'windspeed', 'lag_1', 'lag_24', 'daylight_hours']] = scaler_loaded.fit_transform(user_inputs[['temp', 'humidity', 'windspeed', 'lag_1', 'lag_24', 'daylight_hours']])
     desired_order = ['year', 'month', 'hr', 'holiday', 'weekday', 'workingday', 'weather_condition', 'temp', 'humidity', 'windspeed', 'daylight_hours', 'lag_1', 'lag_24']
     user_inputs = user_inputs[desired_order]
 
