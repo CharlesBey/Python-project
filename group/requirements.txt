@@ -7,3 +7,5 @@ plotly
 scikit-learn
 xgboost 
 numpy 
+ydata_profiling
+streamlit-pandas-profiling
