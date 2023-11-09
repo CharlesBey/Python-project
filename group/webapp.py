@@ -1,12 +1,17 @@
 import streamlit as st
 import pickle
+import pandas_profiling
+from streamlit_pandas_profiling import st_profile_report
 import pandas as pd
+import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
 from ydata_profiling import ProfileReport
 import matplotlib.pyplot as plt
 import numpy as np
 import plotly.subplots as sp
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 import plotly.offline as pyo
 
 # Load your dataset
@@ -86,8 +91,8 @@ if st.sidebar.checkbox('Summary Statistics'):
 if st.sidebar.checkbox('Profile report'):
     st.subheader('Data Profiling Report')
     st.write('Use this interactive report to explore the variables if necessary.')
-    report_html = profile.to_html()
-    st.components.v1.html(report_html, width=800, height=600, scrolling=True)
+    profile = pandas_profiling.ProfileReport(data)
+    st_profile_report(profile)
 
 if st.sidebar.checkbox('Outlier analysis'):
     st.subheader('Outlier analysis')
