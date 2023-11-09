@@ -1,15 +1,12 @@
 import streamlit as st
 import pickle
 import pandas as pd
-import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
 from ydata_profiling import ProfileReport
 import matplotlib.pyplot as plt
 import numpy as np
 import plotly.subplots as sp
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
 import plotly.offline as pyo
 
 # Load your dataset
