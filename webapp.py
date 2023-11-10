@@ -198,61 +198,77 @@ if st.sidebar.checkbox('Graphical analysis'):
     pivot_registered = data.pivot_table(values='registered', index='weekday', columns='hr', aggfunc='sum')
     pivot_casual = data.pivot_table(values='casual', index='weekday', columns='hr', aggfunc='sum')
 
-    # Create a heatmap for Hourly Total Users by Day of the Week
-    fig_total = go.Figure(data=go.Heatmap(
+      fig = go.Figure()
+    
+    # Add Heatmap for Hourly Total Users by Day of the Week
+    fig.add_trace(go.Heatmap(
         z=pivot_total.values,
         x=pivot_total.columns,
         y=pivot_total.index,
         colorscale='plasma',
         zmin=0,
         zmax=pivot_total.values.max(),
-        colorbar=dict(title='Total Users')
+        colorbar=dict(title='Total Users'),
+        name='Total Users'  # Name for the legend
     ))
-    fig_total.update_layout(
-        title='Hourly Total Users by Day of the Week',
-        xaxis_title='Hour of the Day',
-        yaxis_title='Day of the Week',
-        template='plotly'
-    )
-
-    # Create a heatmap for Hourly Registered Users by Day of the Week
-    fig_registered = go.Figure(data=go.Heatmap(
+    
+    # Add Heatmap for Hourly Registered Users by Day of the Week (hidden by default)
+    fig.add_trace(go.Heatmap(
         z=pivot_registered.values,
         x=pivot_registered.columns,
         y=pivot_registered.index,
         colorscale='plasma',
         zmin=0,
         zmax=pivot_registered.values.max(),
-        colorbar=dict(title='Registered Users')
+        colorbar=dict(title='Registered Users'),
+        name='Registered Users',
+        visible=False  # Hide this trace by default
     ))
-    fig_registered.update_layout(
-        title='Hourly Registered Users by Day of the Week',
-        xaxis_title='Hour of the Day',
-        yaxis_title='Day of the Week',
-        template='plotly'
-    )
-
-    # Create a heatmap for Hourly Casual Users by Day of the Week
-    fig_casual = go.Figure(data=go.Heatmap(
+    
+    # Add Heatmap for Hourly Casual Users by Day of the Week (hidden by default)
+    fig.add_trace(go.Heatmap(
         z=pivot_casual.values,
         x=pivot_casual.columns,
         y=pivot_casual.index,
         colorscale='plasma',
         zmin=0,
         zmax=pivot_casual.values.max(),
-        colorbar=dict(title='Casual Users')
+        colorbar=dict(title='Casual Users'),
+        name='Casual Users',
+        visible=False  # Hide this trace by default
     ))
-    fig_casual.update_layout(
-        title='Hourly Casual Users by Day of the Week',
+    
+    # Create dropdown buttons
+    buttons = [
+        dict(label='Total Users',
+             method='update',
+             args=[{'visible': [True, False, False]}]),
+        dict(label='Registered Users',
+             method='update',
+             args=[{'visible': [False, True, False]}]),
+        dict(label='Casual Users',
+             method='update',
+             args=[{'visible': [False, False, True]}]),
+    ]
+    
+    # Update layout for the entire figure
+    fig.update_layout(
+        title='Average Users by Day of the Week by User Type',
         xaxis_title='Hour of the Day',
         yaxis_title='Day of the Week',
-        template='plotly'
+        template='plotly',
+        updatemenus=[
+            dict(buttons=buttons,
+                 direction='down',
+                 showactive=True,
+                 x=0.85,
+                 xanchor='left',
+                 y=1.4,
+                 yanchor='top')
+        ]
     )
-
+    
     # Show the heatmaps
-    st.plotly_chart(fig_total)
-    st.plotly_chart(fig_registered)
-    st.plotly_chart(fig_casual)
 
     st.write("The graphs above show that registered and casual users clearly have different behaviors.")
 
