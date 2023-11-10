@@ -198,7 +198,7 @@ if st.sidebar.checkbox('Graphical analysis'):
     pivot_registered = data.pivot_table(values='registered', index='weekday', columns='hr', aggfunc='sum')
     pivot_casual = data.pivot_table(values='casual', index='weekday', columns='hr', aggfunc='sum')
 
-      fig = go.Figure()
+    fig = go.Figure()
     
     # Add Heatmap for Hourly Total Users by Day of the Week
     fig.add_trace(go.Heatmap(
