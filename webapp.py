@@ -263,7 +263,7 @@ if st.sidebar.checkbox('Graphical analysis'):
                  showactive=True,
                  x=0.85,
                  xanchor='left',
-                 y=1.3,
+                 y=1.2,
                  yanchor='top')
         ]
     )
