@@ -267,9 +267,10 @@ if st.sidebar.checkbox('Graphical analysis'):
                  yanchor='top')
         ]
     )
-    
-    # Show the heatmaps
 
+    # Show the heatmaps
+    st.plotly_chart(fig)
+  
     st.write("The graphs above show that registered and casual users clearly have different behaviors.")
 
     # Aggregate the data by month and weekday
